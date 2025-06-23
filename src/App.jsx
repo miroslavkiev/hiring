@@ -138,7 +138,7 @@ const App = () => {
         </div>
       ) : (
         <div className="p-4 sm:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-none mx-auto">
             <header className="mb-8 flex justify-between items-center">
               <div>
                 <h1 className="text-4xl font-extrabold text-gray-800">Architect Hiring Pipeline</h1>
