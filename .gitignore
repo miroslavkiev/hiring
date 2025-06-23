@@ -1,0 +1,44 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Vite build output
+dist/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS-specific
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Local env files
+.env*
+!.env.example
+
+# Mac system
+*.DS_Store
+
+# Optional: if using coverage tools
+coverage/
+
+# Optional: if using eslint cache
+.eslintcache
+
+# Optional: if using Tailwind JIT or similar
+.tailwind-debug.log
