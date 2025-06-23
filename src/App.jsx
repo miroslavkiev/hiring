@@ -123,7 +123,7 @@ const App = () => {
               <p className="font-semibold">{notification}</p>
             </div>
           )}
-          <div className="text-center bg-white p-8 sm:p-12 rounded-xl shadow-md border w-full max-w-full">
+          <div className="text-center bg-white p-8 sm:p-12 rounded-xl shadow-md border w-full max-w-xl">
             <h1 className="text-3xl font-extrabold text-gray-800">Architect Hiring Pipeline</h1>
             <p className="mt-2 text-gray-500">To get started, please upload your CSV file.</p>
             <button
@@ -189,7 +189,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {sortedCandidates.map((candidate) => (
                 <CandidateCard
                   key={candidate.id}
