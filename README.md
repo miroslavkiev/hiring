@@ -50,3 +50,12 @@ Fetch accessible Google Sheets:
 ```bash
 curl -H "Authorization: Bearer <idToken>" http://localhost:4000/sheets
 ```
+
+### List tabs for a spreadsheet
+
+Fetch worksheet names from a specific Google Sheet:
+
+```bash
+curl -H "Authorization: Bearer <idToken>" \
+     http://localhost:4000/sheets/1AbCdEfGhIjKlMnOpQrStUvWxYz/tabs
+```
