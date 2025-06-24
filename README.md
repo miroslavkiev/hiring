@@ -42,3 +42,11 @@ curl -X POST http://localhost:4000/auth/validate \
   -H 'Content-Type: application/json' \
   -d '{"idToken":"<token>"}'
 ```
+
+### List spreadsheets
+
+Fetch accessible Google Sheets:
+
+```bash
+curl -H "Authorization: Bearer <idToken>" http://localhost:4000/sheets
+```

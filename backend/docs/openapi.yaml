@@ -1,0 +1,26 @@
+paths:
+  /sheets:
+    get:
+      summary: List available spreadsheets
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: Optional case-insensitive name filter
+      responses:
+        '200':
+          description: List of spreadsheets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
