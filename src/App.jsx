@@ -1,22 +1,21 @@
-/* global Papa */
 import React, { useEffect, useState } from 'react';
 import CandidateCard from './components/CandidateCard';
 import PipelineFilter from './components/PipelineFilter';
 import SettingsModal from './components/SettingsModal';
 import { UploadIcon, SettingsIcon } from './components/Icons';
-import { shortenName, normalizeData } from './utils';
+import { shortenName } from './utils';
 
 // --- INITIAL STATE ---
 const initialCandidates = [];
 
 const App = () => {
-  const [allCandidates, setAllCandidates] = useState(initialCandidates);
+  const [allCandidates, _setAllCandidates] = useState(initialCandidates);
   const [pipelineFilter, setPipelineFilter] = useState('All');
   const [sort, setSort] = useState('priority');
   const [shortenNamesFlag, setShortenNamesFlag] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [notification, setNotification] = useState('');
+  const [isLoading, _setIsLoading] = useState(false);
+  const [notification, _setNotification] = useState('');
 
   useEffect(() => {
     // Add favicon dynamically
@@ -32,55 +31,13 @@ const App = () => {
     }
     document.head.appendChild(favicon);
 
-    // Load PapaParse script
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js';
-    script.async = true;
-    document.body.appendChild(script);
-
     return () => {
       if (document.head.contains(favicon)) {
         document.head.removeChild(favicon);
       }
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
     };
   }, []);
 
-  const handleSync = (file) => {
-    if (!file) {
-      setNotification('Error: Please select a CSV file to upload.');
-      setTimeout(() => setNotification(''), 5000);
-      return;
-    }
-    if (typeof Papa === 'undefined') {
-      setNotification('Error: CSV parsing library not loaded. Please try again.');
-      setTimeout(() => setNotification(''), 5000);
-      return;
-    }
-    setIsLoading(true);
-    setNotification('');
-    Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const mappedCandidates = results.data
-          .map(normalizeData)
-          .filter((c) => c && c.name !== 'N/A' && c.name);
-        setAllCandidates(mappedCandidates);
-        setIsLoading(false);
-        setNotification('Data successfully synced!');
-        setIsModalOpen(false);
-        setTimeout(() => setNotification(''), 5000);
-      },
-      error: (error) => {
-        setIsLoading(false);
-        setNotification(`Error parsing file: ${error.message}`);
-        setTimeout(() => setNotification(''), 8000);
-      },
-    });
-  };
 
   const filteredCandidates = allCandidates.filter(
     (c) => pipelineFilter === 'All' || c.pipelineStatus === pipelineFilter
@@ -134,7 +91,7 @@ const App = () => {
               Open Settings & Upload
             </button>
           </div>
-          <SettingsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSync={handleSync} />
+          <SettingsModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
       ) : (
         <div className="p-4 sm:p-6 lg:p-8">
@@ -199,7 +156,7 @@ const App = () => {
               ))}
             </main>
           </div>
-          <SettingsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSync={handleSync} />
+          <SettingsModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
       )}
     </div>

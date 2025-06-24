@@ -5,4 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/hiring/', // 👈 This is the critical fix
   plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.ts',
+    include: ['src/__tests__/**/*.ts?(x)'],
+    environmentOptions: {
+      jsdom: {
+        url: 'http://localhost',
+      },
+    },
+  },
 })
