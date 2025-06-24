@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import requireAuth from '../middleware/requireAuth';
 import syncPipeline from '../services/pipelineService';
+import * as cache from '../lib/cache';
 
 const router = Router();
 
@@ -24,6 +25,12 @@ router.post('/sync', requireAuth, async (req, res) => {
       return res.status(404).json({ error: 'sheet or tab not found' });
     return res.status(502).json({ error: 'google api failure' });
   }
+});
+
+router.get('/data', requireAuth, (req, res) => {
+  const rows = cache.get('data:last');
+  if (!rows) return res.status(404).json({ error: 'no data' });
+  return res.json(rows);
 });
 
 export default router;
