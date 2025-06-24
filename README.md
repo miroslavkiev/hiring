@@ -79,3 +79,13 @@ Background refresh runs every 5 min.
 ```bash
 curl -H "Authorization: Bearer <idToken>" http://localhost:4000/pipeline/data
 ```
+
+## Logs & Errors
+
+The backend writes structured logs with timestamps and log levels. When running via Docker you can view them with:
+
+```bash
+docker compose logs -f backend
+```
+
+Errors from API requests are returned as JSON and surfaced in the UI via toast notifications displayed in the top-right corner.

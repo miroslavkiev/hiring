@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CloseIcon, UploadIcon } from './Icons';
-import toast from 'react-hot-toast';
-import api from '../lib/api';
+import api, { success } from '../lib/api';
 
 interface Props {
   open: boolean;
@@ -101,17 +100,10 @@ const SettingsModal: React.FC<Props> = ({ open, onClose }) => {
       if (!sheetId || !tabGid) return;
       setSyncing(true);
       try {
-        const res = await api.post('/pipeline/sync', { sheetId, tabGid });
-        if (res.ok) {
-          toast.success('Data synced');
-        } else {
-          const json = await res.json().catch(() => ({}));
-          console.error(json);
-          toast.error('Sync failed');
-        }
+        await api.post('/pipeline/sync', { sheetId, tabGid });
+        success('Data synced');
       } catch (err) {
         console.error(err);
-        toast.error('Sync failed');
       } finally {
         setSyncing(false);
       }
@@ -120,7 +112,7 @@ const SettingsModal: React.FC<Props> = ({ open, onClose }) => {
       if (!selectedFile) return;
       const reader = new FileReader();
       reader.onload = () => {
-        toast.success('CSV loaded');
+        success('CSV loaded');
         onClose();
       };
       reader.readAsText(selectedFile);

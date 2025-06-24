@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import { google } from 'googleapis';
 import healthRouter from './routes/health';
 import authRouter from './routes/auth';
@@ -8,6 +8,7 @@ import tabsRouter from './routes/tabs';
 import pipelineRouter from './routes/pipeline';
 import requireAuth from './middleware/requireAuth';
 import logger from './logger';
+import errorHandler from './middleware/errorHandler';
 import { getAuth } from './lib/googleClient';
 
 const app = express();
@@ -28,10 +29,7 @@ app.use('/sheets', requireAuth, sheetsRouter);
 app.use('/sheets', tabsRouter);
 app.use('/pipeline', pipelineRouter);
 
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  logger.error(err.message);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
+app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
   (async () => {
