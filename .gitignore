@@ -42,3 +42,4 @@ coverage/
 
 # Optional: if using Tailwind JIT or similar
 .tailwind-debug.log
+!backend/package-lock.json
