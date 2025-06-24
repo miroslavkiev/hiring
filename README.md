@@ -16,3 +16,13 @@ If you are developing a production application, we recommend using TypeScript wi
 ```bash
 cd backend && npm ci && npm run dev
 ```
+
+## Docker Development
+
+Create a dummy secret and start the API:
+
+```bash
+mkdir -p secrets && echo '{}' > secrets/service-account.json
+docker compose up --build
+```
+
