@@ -4,6 +4,7 @@ import PipelineFilter from './components/PipelineFilter';
 import SettingsModal from './components/SettingsModal';
 import { UploadIcon, SettingsIcon } from './components/Icons';
 import { shortenName } from './utils';
+import ErrorToastProvider from './components/ErrorToastProvider';
 
 // --- INITIAL STATE ---
 const initialCandidates = [];
@@ -65,6 +66,7 @@ const App = () => {
   };
 
   return (
+    <ErrorToastProvider>
     <div className="bg-gray-50 min-h-screen w-full font-sans">
       {allCandidates.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-screen w-full p-4">
@@ -160,6 +162,7 @@ const App = () => {
         </div>
       )}
     </div>
+    </ErrorToastProvider>
   );
 };
 
