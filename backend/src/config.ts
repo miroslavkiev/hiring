@@ -11,6 +11,7 @@ const schema = z.object({
   SERVICE_ACCOUNT_JSON: z.string().optional(),
   GOOGLE_APPLICATION_CREDENTIALS: z.string().optional(),
   LOG_LEVEL: z.string().optional(),
+  ALLOWED_USERS: z.string(),
 });
 
 const parsed = schema.safeParse(process.env);
@@ -30,6 +31,14 @@ export const PORT = parsed.data.PORT ? parseInt(parsed.data.PORT, 10) : 4000;
 
 export const SERVICE_ACCOUNT_JSON =
   env.SERVICE_ACCOUNT_JSON || env.GOOGLE_APPLICATION_CREDENTIALS;
+
+export const ALLOWED_USERS = env.ALLOWED_USERS.split(',').map((s) => s.trim());
+
+if (ALLOWED_USERS.length === 0) {
+  // eslint-disable-next-line no-console
+  console.error('ALLOWED_USERS env var must contain at least one email');
+  process.exit(1);
+}
 
 if (!SERVICE_ACCOUNT_JSON) {
   // eslint-disable-next-line no-console

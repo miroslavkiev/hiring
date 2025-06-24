@@ -33,3 +33,12 @@ The backend requires a Google service account key to access Drive and Sheets. Se
 compose as shown above). On startup the server will verify the key by fetching
 the authenticated email.
 
+### Login
+
+Send a Google ID token to validate access:
+
+```bash
+curl -X POST http://localhost:4000/auth/validate \
+  -H 'Content-Type: application/json' \
+  -d '{"idToken":"<token>"}'
+```
