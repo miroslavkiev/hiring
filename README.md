@@ -59,3 +59,13 @@ Fetch worksheet names from a specific Google Sheet:
 curl -H "Authorization: Bearer <idToken>" \
      http://localhost:4000/sheets/1AbCdEfGhIjKlMnOpQrStUvWxYz/tabs
 ```
+
+### Sync pipeline data
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer <idToken>" \
+  -H "Content-Type: application/json" \
+  -d '{"sheetId":"1AbCd…","tabGid":"0"}' \
+  http://localhost:4000/pipeline/sync
+```
