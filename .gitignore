@@ -43,6 +43,7 @@ coverage/
 
 # Secrets
 secrets/service-account.json
+backend/config/settings.json
 
 # Optional: if using Tailwind JIT or similar
 .tailwind-debug.log

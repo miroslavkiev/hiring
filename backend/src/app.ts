@@ -5,6 +5,7 @@ import healthRouter from './routes/health';
 import authRouter from './routes/auth';
 import sheetsRouter from './routes/sheets';
 import tabsRouter from './routes/tabs';
+import pipelineRouter from './routes/pipeline';
 import requireAuth from './middleware/requireAuth';
 import logger from './logger';
 import { getAuth } from './lib/googleClient';
@@ -25,6 +26,7 @@ app.use('/health-protected', requireAuth, (_req, res) => {
 app.use('/auth', authRouter);
 app.use('/sheets', requireAuth, sheetsRouter);
 app.use('/sheets', tabsRouter);
+app.use('/pipeline', pipelineRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(err.message);
