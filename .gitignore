@@ -30,6 +30,7 @@ pids
 # Local env files
 .env*
 !.env.example
+!.env.docker
 
 # Mac system
 *.DS_Store
@@ -39,6 +40,9 @@ coverage/
 
 # Optional: if using eslint cache
 .eslintcache
+
+# Secrets
+secrets/service-account.json
 
 # Optional: if using Tailwind JIT or similar
 .tailwind-debug.log

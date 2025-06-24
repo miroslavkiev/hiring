@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env.docker
+    volumes:
+      - ./secrets/service-account.json:/run/secrets/service-account.json:ro
+    environment:
+      SERVICE_ACCOUNT_JSON: /run/secrets/service-account.json
+      PORT: 4000
