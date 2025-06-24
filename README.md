@@ -26,3 +26,10 @@ mkdir -p secrets && echo '{}' > secrets/service-account.json
 docker compose up --build
 ```
 
+## Supplying Google credentials
+
+The backend requires a Google service account key to access Drive and Sheets. Set
+`SERVICE_ACCOUNT_JSON` to the path of your JSON key file (or mount it via Docker
+compose as shown above). On startup the server will verify the key by fetching
+the authenticated email.
+
