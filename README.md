@@ -69,3 +69,11 @@ curl -X POST \
   -d '{"sheetId":"1AbCd…","tabGid":"0"}' \
   http://localhost:4000/pipeline/sync
 ```
+
+Background refresh runs every 5 min.
+
+### Get cached data
+
+```bash
+curl -H "Authorization: Bearer <idToken>" http://localhost:4000/pipeline/data
+```

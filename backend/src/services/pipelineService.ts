@@ -115,6 +115,7 @@ export default async function sync(
 
   const rows = convert(values);
   cache.set(key, rows, CACHE_MS);
+  cache.set('data:last', rows, CACHE_MS);
   await saveSettings({ sheetId, tabGid });
   return rows;
 }
