@@ -3,6 +3,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { google } from 'googleapis';
 import healthRouter from './routes/health';
 import authRouter from './routes/auth';
+import sheetsRouter from './routes/sheets';
 import requireAuth from './middleware/requireAuth';
 import logger from './logger';
 import { getAuth } from './lib/googleClient';
@@ -21,6 +22,7 @@ app.use('/health-protected', requireAuth, (_req, res) => {
   res.json({ status: 'ok' });
 });
 app.use('/auth', authRouter);
+app.use('/sheets', requireAuth, sheetsRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(err.message);
